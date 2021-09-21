@@ -1,0 +1,23 @@
+---
+output: html_document
+---
+
+## Excercise 10.9
+
+__Consider the USArrests data. We will now perform hierarchical clustering on the states.__
+
+a. __Using hierarchical clustering with complete linkage and Euclidean distance, cluster the states.__
+
+<!-- enter your solution here -->
+
+b. __Cut the dendrogram at a height that results in three distinct clusters. Which states belong to which clusters?__
+
+<!-- enter your solution here -->
+
+c. __Hierarchically cluster the states using complete linkage and Euclidean distance, after scaling the variables to have standard deviation one.__
+
+<!-- enter your solution here -->
+
+d. __What effect does scaling the variables have on the hierarchical clustering obtained? In your opinion, should the variables be scaled before the inter-observation dissimilarities are computed? Provide a justification for your answer.__
+
+<!-- enter your solution here -->

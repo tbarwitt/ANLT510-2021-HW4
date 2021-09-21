@@ -1,0 +1,17 @@
+---
+output: html_document
+---
+
+## Excercise 10.8
+
+__In Section 10.2.3, a formula for calculating PVE was given in Equation 10.8. We also saw that the PVE can be obtained using the sdev output of the prcomp() function.__
+
+__On the USArrests data, calculate PVE in two ways:__
+
+a. __Using the sdev output of the `prcomp()` function, as was done in Section 10.2.3.__
+
+<!-- enter your solution here -->
+
+b. __By applying Equation 10.8 directly. That is, use the prcomp() function to compute the principal component loadings. Then, use those loadings in Equation 10.8 to obtain the PVE.__
+
+<!-- enter your solution here -->

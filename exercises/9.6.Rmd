@@ -1,0 +1,23 @@
+---
+output: html_document
+---
+
+## Excercise 9.6
+
+__At the end of Section 9.6.1, it is claimed that in the case of data that is just barely linearly separable, a support vector classifier with a small value of cost that misclassifies a couple of training observations may perform better on test data than one with a huge value of cost that does not misclassify any training observations. You will now investigate this claim.__
+
+a. __Generate two-class data with p = 2 in such a way that the classes are just barely linearly separable.__
+
+<!-- enter your solution here -->
+
+b. __Compute the cross-validation error rates for support vector classifiers with a range of cost values. How many training errors are misclassified for each value of cost considered, and how does this relate to the cross-validation errors obtained?__
+
+<!-- enter your solution here -->
+
+c. __Generate an appropriate test data set, and compute the test errors corresponding to each of the values of `cost` considered. Which value of `cost` leads to the fewest test errors, and how does this compare to the values of `cost` that yield the fewest training errors and the fewest cross-validation errors?__
+
+<!-- enter your solution here -->
+
+d. __Discuss your results.__
+
+<!-- enter your solution here -->

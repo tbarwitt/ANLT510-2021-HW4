@@ -1,0 +1,39 @@
+---
+output: html_document
+---
+
+## Excercise 9.8
+
+__This problem involves the `OJ` data set which is part of the `ISLR` package.__
+
+a. __Create a training set containing a random sample of 800 observations, and a test set containing the remaining observations.__
+
+<!-- enter your solution here -->
+
+b. __Fit a support vector classifier to the training data using `cost=0.01`, with Purchase as the response and the other variables as predictors. Use the `summary()` function to produce summary statistics, and describe the results obtained.__
+
+<!-- enter your solution here -->
+
+c. __What are the training and test error rates?__
+
+<!-- enter your solution here -->
+
+d. __Use the `tune()` function to select an optimal `cost`. Consider values in the range 0.01 to 10.__
+
+<!-- enter your solution here -->
+
+e. __Compute the training and test error rates using this new value for `cost`.__
+
+<!-- enter your solution here -->
+
+f. __Repeat parts (b) through (e) using a support vector machine with a radial kernel. Use the default value for `gamma`.__
+
+<!-- enter your solution here -->
+
+g. __Repeat parts (b) through (e) using a support vector machine with a polynomial kernel. Set `degree=2`.__
+
+<!-- enter your solution here -->
+
+h. __Overall, which approach seems to give the best results on this data?__
+
+<!-- enter your solution here -->
