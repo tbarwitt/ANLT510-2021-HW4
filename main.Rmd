@@ -1,0 +1,31 @@
+---
+title: "Wittenberg University: ANLT 510"
+subtitle: "Homework #4"
+author: "<enter your name here>"
+date: "`r format(Sys.Date(),'%d %B %Y')`"
+output: 
+  html_document:
+    css: "css/custom.css"
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup,echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+```{r q_9.6,child="exercises/9.6.Rmd"}
+```
+
+```{r q_9.8,child="exercises/9.8.Rmd"}
+```
+
+```{r q_10.7,child="exercises/10.7.Rmd"}
+```
+
+```{r q_10.8,child="exercises/10.8.Rmd"}
+```
+
+```{r q_10.9,child="exercises/10.9.Rmd"}
+```
