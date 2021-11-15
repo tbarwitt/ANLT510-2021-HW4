@@ -9,6 +9,9 @@ __This problem involves the `OJ` data set which is part of the `ISLR` package.__
 a. __Create a training set containing a random sample of 800 observations, and a test set containing the remaining observations.__
 
 ```{r}
+library(ISLR)
+library(e1071)
+attach(OJ)
 set.seed(27)
 train<-sample(dim(OJ)[1], 800)
 train.OJ<-OJ[train,]
