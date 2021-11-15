@@ -8,16 +8,34 @@ __Consider the USArrests data. We will now perform hierarchical clustering on th
 
 a. __Using hierarchical clustering with complete linkage and Euclidean distance, cluster the states.__
 
-<!-- enter your solution here -->
+```{r}
+set.seed(2)
+hc.complete <- hclust(dist(USArrests), method = "complete")
+plot(hc.complete)
+```
+
 
 b. __Cut the dendrogram at a height that results in three distinct clusters. Which states belong to which clusters?__
 
-<!-- enter your solution here -->
+```{r}
+cutree(hc.complete, 3)
+```
+
 
 c. __Hierarchically cluster the states using complete linkage and Euclidean distance, after scaling the variables to have standard deviation one.__
 
-<!-- enter your solution here -->
+```{r}
+sd.data <- scale(USArrests)
+hc.complete.sd <- hclust(dist(sd.data), method = "complete")
+plot(hc.complete.sd)
+```
 
 d. __What effect does scaling the variables have on the hierarchical clustering obtained? In your opinion, should the variables be scaled before the inter-observation dissimilarities are computed? Provide a justification for your answer.__
 
-<!-- enter your solution here -->
+```{r}
+cutree(hc.complete.sd, 3)
+```
+```{r}
+table(cutree(hc.complete, 3), cutree(hc.complete.sd, 3))
+```
+Scaling the variables have more affect on the clusters than on the trees. Perhaps before would be better since the measures have different units

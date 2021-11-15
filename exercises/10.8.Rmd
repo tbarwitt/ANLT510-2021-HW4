@@ -10,8 +10,23 @@ __On the USArrests data, calculate PVE in two ways:__
 
 a. __Using the sdev output of the `prcomp()` function, as was done in Section 10.2.3.__
 
-<!-- enter your solution here -->
+```{r}
+pr.out <- prcomp(USArrests, scale = TRUE)
+pr.var <- pr.out$sdev^2
+pve <- pr.var / sum(pr.var)
+sum(pr.var)
+```
+```{r}
+pve
+```
+
 
 b. __By applying Equation 10.8 directly. That is, use the prcomp() function to compute the principal component loadings. Then, use those loadings in Equation 10.8 to obtain the PVE.__
 
-<!-- enter your solution here -->
+```{r}
+loadings <- pr.out$rotation
+USArrests2 <- scale(USArrests)
+sumvar <- sum(apply(as.matrix(USArrests2)^2, 2, sum))
+apply((as.matrix(USArrests2) %*% loadings)^2, 2, sum) / sumvar
+```
+

@@ -8,32 +8,149 @@ __This problem involves the `OJ` data set which is part of the `ISLR` package.__
 
 a. __Create a training set containing a random sample of 800 observations, and a test set containing the remaining observations.__
 
-<!-- enter your solution here -->
+```{r}
+set.seed(27)
+train<-sample(dim(OJ)[1], 800)
+train.OJ<-OJ[train,]
+test.OJ<-OJ[-train,]
+```
+
 
 b. __Fit a support vector classifier to the training data using `cost=0.01`, with Purchase as the response and the other variables as predictors. Use the `summary()` function to produce summary statistics, and describe the results obtained.__
 
-<!-- enter your solution here -->
+```{r}
+svm.linearOJ<- svm(Purchase ~ ., kernel='linear',  data=train.OJ, cost=0.01)
+summary(svm.linearOJ)
+```
+
 
 c. __What are the training and test error rates?__
 
-<!-- enter your solution here -->
+```{r}
+train.pred<-predict(svm.linearOJ, train.OJ)
+table(train.OJ$Purchase, train.pred)
+```
+```{r}
+mean(train.pred != train.OJ$Purchase)
+```
+```{r}
+test.pred<-predict(svm.linearOJ, test.OJ)
+table(test.OJ$Purchase, test.pred)
+```
+```{r}
+mean(test.pred != test.OJ$Purchase)
+```
+The training error rate is 16.75%, and the test error rate is 17.037%
 
 d. __Use the `tune()` function to select an optimal `cost`. Consider values in the range 0.01 to 10.__
 
-<!-- enter your solution here -->
+```{r}
+tune.OJ<-tune(svm, Purchase ~ ., data=train.OJ, kernel='linear', ranges=list(cost=10^seq(-2,1, by=.5)))
+summary(tune.OJ)
+```
+The tune function selected cost = 1 to be the most optimal
 
 e. __Compute the training and test error rates using this new value for `cost`.__
 
-<!-- enter your solution here -->
+```{r}
+newsvm.linearoj<-svm(Purchase ~ ., kernel='linear', data=train.OJ, cost=tune.OJ$best.parameters$cost)
+train.pred<-predict(newsvm.linearoj, train.OJ)
+table(train.OJ$Purchase, train.pred)
+```
+```{r}
+mean(train.pred != train.OJ$Purchase)
+```
+```{r}
+test.pred<-predict(newsvm.linearoj, test.OJ)
+table(test.OJ$Purchase, test.pred)
+```
+```{r}
+mean(test.pred != test.OJ$Purchase)
+```
+The training error rate decreased with the optimal cost used, as well as the test error rate
 
 f. __Repeat parts (b) through (e) using a support vector machine with a radial kernel. Use the default value for `gamma`.__
 
-<!-- enter your solution here -->
+```{r}
+svm.radialoj<-svm(Purchase~ ., kernel='radial', data=train.OJ )
+summary(svm.radialoj)
+```
+```{r}
+train.pred<-predict(svm.radialoj, train.OJ)
+table(train.OJ$Purchase, train.pred)
+```
+```{r}
+mean(train.pred != train.OJ$Purchase)
+```
+```{r}
+test.pred<-predict(svm.radialoj, test.OJ)
+table(test.OJ$Purchase, test.pred)
+```
+```{r}
+mean(test.pred != test.OJ$Purchase)
+```
+```{r}
+tunerad.OJ<-tune(svm, Purchase ~ ., data=train.OJ, kernel='radial', ranges=list(cost=10^seq(-2,1, by=.5)))
+summary(tunerad.OJ)
+```
+```{r}
+newsvm.radialoj<-svm(Purchase ~ ., kernel='radial', data=train.OJ, cost=tunerad.OJ$best.parameters$cost)
+train.pred<-predict(newsvm.radialoj, train.OJ)
+table(train.OJ$Purchase, train.pred)
+```
+```{r}
+mean(train.pred != train.OJ$Purchase)
+```
+```{r}
+test.pred<-predict(newsvm.radialoj, test.OJ)
+table(test.OJ$Purchase, test.pred)
+```
+```{r}
+mean(test.pred != test.OJ$Purchase)
+```
+
 
 g. __Repeat parts (b) through (e) using a support vector machine with a polynomial kernel. Set `degree=2`.__
 
-<!-- enter your solution here -->
+```{r}
+svm.polyoj<-svm(Purchase~ ., kernel='polynomial', data=train.OJ, degree=2 )
+summary(svm.polyoj)
+```
+```{r}
+train.pred<-predict(svm.polyoj, train.OJ)
+table(train.OJ$Purchase, train.pred)
+```
+```{r}
+mean(train.pred != train.OJ$Purchase)
+```
+```{r}
+test.pred<-predict(svm.polyoj, test.OJ)
+table(test.OJ$Purchase, test.pred)
+```
+```{r}
+mean(test.pred != test.OJ$Purchase)
+```
+```{r}
+tunepoly.OJ<-tune(svm, Purchase ~ ., data=train.OJ, kernel='polynomial', degree=2, ranges=list(cost=10^seq(-2,1, by=.5)))
+summary(tunepoly.OJ)
+```
+```{r}
+newsvm.polyoj<-svm(Purchase ~ ., kernel='polynomial', data=train.OJ, degree=2, cost=tunerad.OJ$best.parameters$cost)
+train.pred<-predict(newsvm.polyoj, train.OJ)
+table(train.OJ$Purchase, train.pred)
+```
+```{r}
+mean(train.pred != train.OJ$Purchase)
+```
+```{r}
+test.pred<-predict(newsvm.polyoj, test.OJ)
+table(test.OJ$Purchase, test.pred)
+```
+```{r}
+mean(test.pred != test.OJ$Purchase)
+```
+
 
 h. __Overall, which approach seems to give the best results on this data?__
 
-<!-- enter your solution here -->
+The radial kernel with a default gamma resulted in the lowest misclassification rate for both training and test sets
