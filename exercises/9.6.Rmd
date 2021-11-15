@@ -9,6 +9,10 @@ __At the end of Section 9.6.1, it is claimed that in the case of data that is ju
 a. __Generate two-class data with p = 2 in such a way that the classes are just barely linearly separable.__
 
 ```{r}
+library(tune)
+library(e1071)
+library(tibble)
+library(ggplot2)
 set.seed(1)
 x.one <- runif(500, 0, 90)
 y.one <- runif(500, x.one + 10, 100)
@@ -28,16 +32,15 @@ points(x[-class.one], y[-class.one], col = "red", pch = 4)
 
 b. __Compute the cross-validation error rates for support vector classifiers with a range of cost values. How many training errors are misclassified for each value of cost considered, and how does this relate to the cross-validation errors obtained?__
 
-```{r}
+```{r cache = TRUE}
+library(tibble)
 set.seed(2)
 z <- rep(0, 1100)
 z[class.one] <- 1
 data <- data.frame(x = x, y = y, z = as.factor(z))
 tune.out <- tune(svm, z ~ ., data = data, kernel = "linear", ranges = list(cost = c(0.01, 0.1, 1, 5, 10, 100, 1000, 10000)))
-
 summary(tune.out)
 ```
-
 
 c. __Generate an appropriate test data set, and compute the test errors corresponding to each of the values of `cost` considered. Which value of `cost` leads to the fewest test errors, and how does this compare to the values of `cost` that yield the fewest training errors and the fewest cross-validation errors?__
 
@@ -45,7 +48,6 @@ c. __Generate an appropriate test data set, and compute the test errors correspo
 x.test <- runif(1000, 0, 100)
 class.one <- sample(1000, 500)
 y.test <- rep(NA, 1000)
-
 for (i in class.one) {
     y.test[i] <- runif(1, x.test[i], 100)
 }
